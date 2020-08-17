@@ -10,8 +10,7 @@ Dependencies:	CMSIS Core, STM32F4xx/STM32F401xE Startup files
 */
 
 #include "stm32f401xe.h"
-#include "pinDefines.h"		// For configLED(LEDx, GPIOx), OutputHigh(GPIOx, PINx)
-#include "GPIO.h"
+#include "pinDefines.h"
 #include "UART.h"
 
 // Global variables
@@ -30,9 +29,9 @@ int main(void) {
 	printString("Hello World!\n");
 	initSysTick();
 
+	
 	while (1) {
-		
-		
+	
 	}
 }
 
@@ -41,11 +40,10 @@ int main(void) {
 
 void USART6_IRQnHandler(void) {
 
-    if (USART6->SR & USART_SR_RXNE) {			// 'Receive register not empty' interrupt.
-		data = USART6->DR;						// Copy new data into the buffer.
-		USART6->DR = data;						// echo the character
-		while(!(USART6->SR & USART_SR_TC)){}	// wait until char sent
-    }
+	data = USART6->DR;						// Copy new data into the buffer.
+	USART6->DR = data;						// echo the character
+	while(!(USART6->SR & USART_SR_TC)){}	// wait until char sent
+
 	// "RXNE bit set by hardware when the content of the 
 	// RDR shift register has been transferred to the USART_RDR register"
 }
